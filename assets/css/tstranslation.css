@@ -1,0 +1,58 @@
+.tstranslation-list .tstranslation-category-tabs {
+    display: none;
+}
+.tstranslation-list table thead th {
+    vertical-align: top;
+}
+.tstranslation-list table .ts-add-language {
+    color: #000;
+}
+.tstranslation-list table tbody td {
+    vertical-align: middle;
+}
+.tstranslation-list table .ui-sortable tr td:nth-child(1),
+.tstranslation-list table .ui-sortable tr td:nth-child(2),
+.tstranslation-list table .ui-sortable tr td:nth-child(3) {
+    cursor: s-resize;
+}
+.tstranslation-list .translate-div .popover-title {
+    display: none !important;
+}
+.tstranslation-list .grid-view table .btn,
+.tstranslation-list .tab-content table thead .btn {
+    margin: 0 5px;
+}
+.tstranslation-list .grid-view table.items th,
+.tstranslation-list .grid-view table.items td {
+    padding: 5px;
+}
+.tstranslation-list .grid-view table tbody td .badge {
+    margin: 0 5px;
+}
+.tstranslation-list .grid-view table tbody tr td:last-child {
+    text-align: right;
+}
+.ts-language-widget.inline .ts-lang-changer-list,
+.ts-dt-language-widget.inline .ts-lang-changer-list { 
+    list-style: none;
+    display: inline-block;
+    padding: 0;
+}
+.ts-language-widget.inline .ts-lang-changer-list li,
+.ts-dt-language-widget.inline .ts-lang-changer-list li {
+    display: inline;
+    border-right: 1px solid #C7BEBE;
+    padding: 0 10px;
+}
+.ts-language-widget.inline .ts-lang-changer-list li:last-child,
+.ts-dt-language-widget.inline .ts-lang-changer-list li:last-child {
+    border: none;
+}
+.ts-language-widget.inline .ts-current-lang,
+.ts-dt-language-widget.inline .ts-current-dt-lang {
+    padding: 0;
+    padding: 0 10px;
+    border-right: 1px solid #C7BEBE;
+    border-radius: 0;
+    display: inline;
+}
