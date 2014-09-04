@@ -29,7 +29,7 @@ class TsTranslationComponent extends TsTranslation
                 echo '<button type="button" class="btn btn-warning ts-change-status" data-id="'.$data->getPrimaryKey().'" data-tstoggle="tooltip" title="enable / disable language for frontend language widget"><i class="glyphicon glyphicon-edit">&nbsp;&nbsp;</i>Change status</button>';
                 echo '<button type="button" class="btn btn-primary ts-make-default" data-id="'.$data->getPrimaryKey().'" data-tstoggle="tooltip" title="make this language as default"><i class="glyphicon glyphicon-pushpin">&nbsp;&nbsp;</i>Make default</button>';
                 echo '<button type="button" class="btn btn-danger ts-remove"  data-id="'.$data->getPrimaryKey().'" data-tstoggle="tooltip" title="delete language"><i class="glyphicon glyphicon-trash">&nbsp;&nbsp;</i>Remove</button>';
-                echo '<button type="button" class="btn btn-success ts-translate" data-language="'.$data->code2.'" data-tstoggle="tooltip" title="translate avaible messages for this language"><i class="glyphicon glyphicon-font">&nbsp;&nbsp;</i>Translate</button>';
+                echo '<button type="button" class="btn btn-success ts-translate" data-language="'.$data->code2.'" data-tstoggle="tooltip" title="translate available messages for this language"><i class="glyphicon glyphicon-font">&nbsp;&nbsp;</i>Translate</button>';
                 break;
         }
     }
@@ -64,13 +64,13 @@ class TsTranslationComponent extends TsTranslation
     }
     
     /**
-     * Return array of avaible (created) languages with its all attributes if $listAttribute is false / null,
+     * Return array of available (created) languages with its all attributes if $listAttribute is false / null,
      *      or langaugeCode => $listAttribute array
      * 
      * @param type $listAttribute
      * @return array
      */
-    public static function getAvaibleLanguages($listAttribute = 'name') {
+    public static function getAvailableLanguages($listAttribute = 'name') {
         $languages = ExtLanguages::model()->findAll();
         if($listAttribute) {
             $languageList = CHtml::listData($languages, 'code2', $listAttribute);

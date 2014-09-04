@@ -1,12 +1,13 @@
 TsTranslation
 =============
-
+    
+   
 Extension for Yii framework (version `1.1.*`).  
 Easy to make Yii applications (web pages) multilanguage.
-
+You can discuss extension in [TsTranslation topic](http://www.yiiframework.com/forum/index.php/topic/57076-tstranslation/)
 
 ## Installation
-* Download **[TsTranslation extension](http://tsaribekyan.tk/files/tstranslation.zip)** ,
+* Download latest version of **[TsTranslation extension](https://github.com/TaronSaribekyan/TsTranslation/)** ,
 * Unpack `tstranslatin-*.*.*.zip` to extension folder of your Yii project:  `.../protected/extensions/tstranslation`,
 * **Import `tstranslation.sql` into your database**,
 * Customize your configuration file (default `.../protected/config/main.php`):
@@ -51,7 +52,7 @@ Easy to make Yii applications (web pages) multilanguage.
     				 * Set `accessRules` parameter (NOT REQUIRED),
     				 * parameter effects to dynamic content translation and language managment
     				 *
-    				 * AVAIBLE VALUES:
+    				 * AVAILABLE VALUES:
     				 * - '*' means all users
     				 * - '@' means all registered users
     				 * - `username`. Example: 'admin' means Yii::app()->user->name === 'admin'
@@ -65,7 +66,7 @@ Easy to make Yii applications (web pages) multilanguage.
     				 * Set `languageChangeFunction` (NOT REQUIRED),
     				 * function processing language change
     				 *
-    				 * AVAIBLE VALUES:
+    				 * AVAILABLE VALUES:
     				 * - `true` means uses extension internal function (RECOMENDED)
     				 * - `array()` means user defined function. Example: array('TestClass', 'testMethod'), 'TestClass' and 'testMethod' must be exist and imported to project
     				 * DEFAULT VALUE: `true`
@@ -84,7 +85,7 @@ Easy to make Yii applications (web pages) multilanguage.
     				/**
     				 * Set `showLangInUrl` parameter (NOT REQUIRED),
     				 *
-    				 * AVAIBLE VALUES:
+    				 * AVAILABLE VALUES:
     				 * - `true` means language code shows in url. Example: .../mysite/en/article/create
     				 * - `false` means language code not shows in url. Example: .../mysite/article/create
     				 * DEFAULT VALUE: `true`
@@ -96,7 +97,7 @@ Easy to make Yii applications (web pages) multilanguage.
     				 * this parameter takes effect only if `showLangInUrl` parameter is `true`.
     				 * It strongly recomended to add language rule to `rules` parameter handly
     				 *
-    				 * AVAIBLES VALUES:
+    				 * AVAILABLES VALUES:
     				 * - `true` means automaticly prepends `_lang` parameter before all rules.
     				 *      Example: '<_lang:\w+><controller:\w+>/<id:\d+>' => '<controller>/view',
     				 * - `false` means `_lang` parameter you must add handly
@@ -125,7 +126,7 @@ Easy to make Yii applications (web pages) multilanguage.
     				/**
                      * Set `notTranslatedMessage` parameter (NOT REQUIRED),
                      *
-                     * AVAIBLE VALUES:
+                     * AVAILABLE VALUES:
                      * - `false / null` means nothing shows if message translation is empty
                      * - `text` means shows defined text if message translation is empty.
                      *      Example: 'Not translated data!'
@@ -136,7 +137,7 @@ Easy to make Yii applications (web pages) multilanguage.
                     /**
                      * Set `ifNotTranslatedShowDefault` parameter (NOT REQUIRED),
                      *
-                     * AVAIBLE VALUES:
+                     * AVAILABLE VALUES:
                      * - `false` means shows `$this->notTranslatedMessage` if message translation is empty
                      * - `true` means shows default language translation if message translation is empty.
                      * DEFAULT VALUE: `true`
@@ -337,7 +338,7 @@ Press `Remove` button to remove language, then in prompt window enter `no` or `y
     public $itemTemplate = '{flag} ({code}) {name} ({nativeName})';
     
     /**
-     * display language content if only one language is avaible
+     * display language content if only one language is available
      * @var bool
      */
     public $showIsOne = false;
@@ -354,7 +355,7 @@ Press `Remove` button to remove language, then in prompt window enter `no` or `y
      * its required to set false if bootstrap.js already loaded in your page
      * @var bool
      */
-    public $includeBootstrap = true;
+    public $includeBootstrap = false;
     
     /**
      * load minified or source scripts
@@ -363,12 +364,12 @@ Press `Remove` button to remove language, then in prompt window enter `no` or `y
     public $minifyScripts = true;
     
     /**
-     * tipe of widget view, avaible parameters are
+     * tipe of widget view, available parameters are
      * - `dropdown` languages shows as bootstrap dropdown
      * - `inline` languages shows inline
      * @var string
      */
-    public $type = 'dropdown';
+    public $type = 'inline';
     
 #### - *Capabilities*
 
@@ -386,13 +387,13 @@ Press `Remove` button to remove language, then in prompt window enter `no` or `y
 
 2. For **frontend language changer**:
     	$this->widget('tstranslation.widgets.TsLanguageWidget', array(
-            'includeBootstrap' => false, // if in your project bootstrap.js loaded already
-            'type' => 'inline', // defaults uses `dropdown`
+            'includeBootstrap' => false, // if you want to use 'dropdown' type in your project and bootstrap.js not loaded
+            'type' => 'dropdown', // defaults uses `inline`
     	));
 
 ----
 
-## Main avaible methods
+## Main available methods
 
 ----
     /**
@@ -405,13 +406,13 @@ Press `Remove` button to remove language, then in prompt window enter `no` or `y
     TsTranslationComponent::getActiveLanguages($listAttribute = 'name')
     
     /**
-     * Return array of avaible (created) languages with its all attributes if $listAttribute is false / null,
+     * Return array of available (created) languages with its all attributes if $listAttribute is false / null,
      *      or langaugeCode => $listAttribute array
      * 
      * @param type $listAttribute
      * @return array
      */
-    TsTranslationComponent::getAvaibleLanguages($listAttribute = 'name')
+    TsTranslationComponent::getAvailableLanguages($listAttribute = 'name')
     
     /**
      * Returns array of default language attributes, or attribute $attribute of default language
@@ -700,14 +701,7 @@ Lets go to example of classes.
         	 * Add `TsLanguageWidget` in layout file
         	 * This is language selector (changer) witget
         	 */
-        	$this->widget('tstranslation.widgets.TsLanguageWidget', array(
-        		/**
-        		 * You can define `type` parameter which must be
-        		 * `dropdown` - languages shows as bootstrap dropdown
-        		 * `inline` - languages shows inline
-        		 */
-        		'type' => 'inline'
-        	));
+        	$this->widget('tstranslation.widgets.TsLanguageWidget');
         	
         	/************************************/
         	

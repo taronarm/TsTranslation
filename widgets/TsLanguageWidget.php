@@ -35,7 +35,7 @@ class TsLanguageWidget extends CWidget
     public $itemTemplate = '{flag} ({code}) {name} ({nativeName})';
     
     /**
-     * display language content if only one language is avaible
+     * display language content if only one language is available
      * @var bool
      */
     public $showIsOne = false;
@@ -52,7 +52,7 @@ class TsLanguageWidget extends CWidget
      * its required to set false if bootstrap.js already loaded in your page
      * @var bool
      */
-    public $includeBootstrap = true;
+    public $includeBootstrap = false;
     
     /**
      * load minified or source scripts
@@ -61,12 +61,12 @@ class TsLanguageWidget extends CWidget
     public $minifyScripts = true;
     
     /**
-     * tipe of widget view, avaible parameters are
+     * tipe of widget view, available parameters are
      * - `dropdown` languages shows as bootstrap dropdown
      * - `inline` languages shows inline
      * @var string
      */
-    public $type = 'dropdown';
+    public $type = 'inline';
 
 
     private $_minifySuffix = '';
@@ -110,7 +110,7 @@ class TsLanguageWidget extends CWidget
             if(!TsTranslation::model()->isAccessEnabled()) {
                 throw new CHttpException(403, 'You have no permission to use dynamic content save method!');
             }
-            $languageArray = TsTranslationComponent::getAvaibleLanguages(false);
+            $languageArray = TsTranslationComponent::getAvailableLanguages(false);
             if(!$this->showIsOne && count($languageArray) <= 1) {
                 return;
             }

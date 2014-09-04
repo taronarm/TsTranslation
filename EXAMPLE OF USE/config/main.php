@@ -37,7 +37,7 @@
 				 * Set `accessRules` parameter (NOT REQUIRED),
 				 * parameter effects to dynamic content translation and language managment
 				 *
-				 * AVAIBLE VALUES:
+				 * AVAILABLE VALUES:
 				 * - '*' means all users
 				 * - '@' means all registered users
 				 * - `username`. Example: 'admin' means Yii::app()->user->name === 'admin'
@@ -51,7 +51,7 @@
 				 * Set `languageChangeFunction` (NOT REQUIRED),
 				 * function processing language change
 				 *
-				 * AVAIBLE VALUES:
+				 * AVAILABLE VALUES:
 				 * - `true` means uses extension internal function (RECOMENDED)
 				 * - `array()` means user defined function. Example: array('TestClass', 'testMethod'), 'TestClass' and 'testMethod' must be exist and imported to project
 				 * DEFAULT VALUE: `true`
@@ -70,7 +70,7 @@
 				/**
 				 * Set `showLangInUrl` parameter (NOT REQUIRED),
 				 *
-				 * AVAIBLE VALUES:
+				 * AVAILABLE VALUES:
 				 * - `true` means language code shows in url. Example: .../mysite/en/article/create
 				 * - `false` means language code not shows in url. Example: .../mysite/article/create
 				 * DEFAULT VALUE: `true`
@@ -82,7 +82,7 @@
 				 * this parameter takes effect only if `showLangInUrl` parameter is `true`.
 				 * It strongly recomended to add language rule to `rules` parameter handly
 				 *
-				 * AVAIBLES VALUES:
+				 * AVAILABLES VALUES:
 				 * - `true` means automaticly prepends `_lang` parameter before all rules.
 				 *      Example: '<_lang:\w+><controller:\w+>/<id:\d+>' => '<controller>/view',
 				 * - `false` means `_lang` parameter you must add handly
@@ -111,7 +111,7 @@
 				/**
 				 * Set `notTranslatedMessage` parameter (NOT REQUIRED),
 				 *
-				 * AVAIBLE VALUES:
+				 * AVAILABLE VALUES:
 				 * - `false / null` means nothing shows if message translation is empty
 				 * - `text` means shows defined text if message translation is empty.
 				 *      Example: 'Not translated data!'
@@ -122,7 +122,7 @@
 				/**
 				 * Set `ifNotTranslatedShowDefault` parameter (NOT REQUIRED),
 				 *
-				 * AVAIBLE VALUES:
+				 * AVAILABLE VALUES:
 				 * - `false` means shows `$this->notTranslatedMessage` if message translation is empty
 				 * - `true` means shows default language translation if message translation is empty.
 				 * DEFAULT VALUE: `true`

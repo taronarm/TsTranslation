@@ -5158,7 +5158,7 @@ noscript p {
                  * Set `accessRules` parameter (NOT REQUIRED),
                  * parameter effects to dynamic content translation and language managment
                  *
-                 * AVAIBLE VALUES:
+                 * AVAILABLE VALUES:
                  * - &#39;*&#39; means all users
                  * - &#39;@&#39; means all registered users
                  * - `username`. Example: &#39;admin&#39; means Yii::app()-&gt;user-&gt;name === &#39;admin&#39;
@@ -5172,7 +5172,7 @@ noscript p {
                  * Set `languageChangeFunction` (NOT REQUIRED),
                  * function processing language change
                  *
-                 * AVAIBLE VALUES:
+                 * AVAILABLE VALUES:
                  * - `true` means uses extension internal function (RECOMENDED)
                  * - `array()` means user defined function. Example: array(&#39;TestClass&#39;, &#39;testMethod&#39;), &#39;TestClass&#39; and &#39;testMethod&#39; must be exist and imported to project
                  * DEFAULT VALUE: `true`
@@ -5191,7 +5191,7 @@ noscript p {
                 /**
                  * Set `showLangInUrl` parameter (NOT REQUIRED),
                  *
-                 * AVAIBLE VALUES:
+                 * AVAILABLE VALUES:
                  * - `true` means language code shows in url. Example: .../mysite/en/article/create
                  * - `false` means language code not shows in url. Example: .../mysite/article/create
                  * DEFAULT VALUE: `true`
@@ -5203,7 +5203,7 @@ noscript p {
                  * this parameter takes effect only if `showLangInUrl` parameter is `true`.
                  * It strongly recomended to add language rule to `rules` parameter handly
                  *
-                 * AVAIBLES VALUES:
+                 * AVAILABLES VALUES:
                  * - `true` means automaticly prepends `_lang` parameter before all rules.
                  *      Example: &#39;&lt;_lang:\w+&gt;&lt;controller:\w+&gt;/&lt;id:\d+&gt;&#39; =&gt; &#39;&lt;controller&gt;/view&#39;,
                  * - `false` means `_lang` parameter you must add handly
@@ -5232,7 +5232,7 @@ noscript p {
                 /**
                  * Set `notTranslatedMessage` parameter (NOT REQUIRED),
                  *
-                 * AVAIBLE VALUES:
+                 * AVAILABLE VALUES:
                  * - `false / null` means nothing shows if message translation is empty
                  * - `text` means shows defined text if message translation is empty.
                  *      Example: &#39;Not translated data!&#39;
@@ -5243,7 +5243,7 @@ noscript p {
                 /**
                  * Set `ifNotTranslatedShowDefault` parameter (NOT REQUIRED),
                  *
-                 * AVAIBLE VALUES:
+                 * AVAILABLE VALUES:
                  * - `false` means shows `$this-&gt;notTranslatedMessage` if message translation is empty
                  * - `true` means shows default language translation if message translation is empty.
                  * DEFAULT VALUE: `true`
@@ -5408,7 +5408,7 @@ public $template = &#39;{items}&#39;;
 public $itemTemplate = &#39;{flag} ({code}) {name} ({nativeName})&#39;;
 
 /**
- * display language content if only one language is avaible
+ * display language content if only one language is available
  * @var bool
  */
 public $showIsOne = false;
@@ -5434,7 +5434,7 @@ public $includeBootstrap = true;
 public $minifyScripts = true;
 
 /**
- * tipe of widget view, avaible parameters are
+ * tipe of widget view, available parameters are
  * - `dropdown` languages shows as bootstrap dropdown
  * - `inline` languages shows inline
  * @var string
@@ -5462,7 +5462,7 @@ public $type = &#39;dropdown&#39;;
 </code></pre></li>
 </ol>
 <hr>
-<h2 id="main-avaible-methods">Main avaible methods</h2>
+<h2 id="main-available-methods">Main available methods</h2>
 <hr>
 <pre><code>/**
  * Return array of active languages with its all attributes if $listAttribute is false / null,
@@ -5474,13 +5474,13 @@ public $type = &#39;dropdown&#39;;
 TsTranslationComponent::getActiveLanguages($listAttribute = &#39;name&#39;)
 
 /**
- * Return array of avaible (created) languages with its all attributes if $listAttribute is false / null,
+ * Return array of available (created) languages with its all attributes if $listAttribute is false / null,
  *      or langaugeCode =&gt; $listAttribute array
  * 
  * @param type $listAttribute
  * @return array
  */
-TsTranslationComponent::getAvaibleLanguages($listAttribute = &#39;name&#39;)
+TsTranslationComponent::getAvailableLanguages($listAttribute = &#39;name&#39;)
 
 /**
  * Returns array of default language attributes, or attribute $attribute of default language

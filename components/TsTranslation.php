@@ -130,7 +130,7 @@ class TsTranslation extends CApplicationComponent
         if($onlyActive === true) {
             $langList = TsTranslationComponent::getActiveLanguages('asDefault');
         } else {
-            $langList = TsTranslationComponent::getAvaibleLanguages('asDefault');
+            $langList = TsTranslationComponent::getAvailableLanguages('asDefault');
         }
         
         if(isset($langList[$langCode])) {
