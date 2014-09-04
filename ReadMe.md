@@ -562,7 +562,7 @@ Lets go to example of classes.
                          * Save attributes at once
                          * Also can save one at one. Example: TsTranslation::save($model, 'fullText');
                          * Third parameter of TsTranslation::save() is language 
-                         *      - as default uses TsTranslation::getDtLanguage() returned value:
+                         *      - as default uses TsTranslation::model()->getDtLanguage() returned value:
                          *      - $this->widget('tstranslation.widgets.TsLanguageWidget', array(
                                     'dynamicTranslate' => true,
                                 ));
@@ -588,7 +588,7 @@ Lets go to example of classes.
                          * Save attributes at once
                          * Also can save one by one. Example: TsTranslation::save($model, 'fullText');
                          * Third parameter of TsTranslation::save() is language 
-                         *      - as default uses TsTranslation::getDtLanguage() returned value:
+                         *      - as default uses TsTranslation::model()->getDtLanguage() returned value:
                          *      - $this->widget('tstranslation.widgets.TsLanguageWidget', array(
                                     'dynamicTranslate' => true,
                                 ));
