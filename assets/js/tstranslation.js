@@ -269,10 +269,13 @@ $(document).ready(function(){
     $(document).on('click', '#tsLangChangerForm a', function(e) {
         e.prventDefault;
         var obj = $(this);
-        var newLang = obj.attr('data-language');
-        $('input#tsNewLang').val(newLang);
-        $('#tsLangChangerForm').submit();
-        return false;
+        obj.parents('.ts-language-widget').find('.open').removeClass('open');
+        if(!obj.hasClass('ts-current-lang-link')) {
+            var newLang = obj.attr('data-language');
+            $('input#tsNewLang').val(newLang);
+            $('#tsLangChangerForm').submit();
+            return false;
+        }
     })
 
 })

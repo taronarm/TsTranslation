@@ -153,6 +153,12 @@ class TsLanguageWidget extends CWidget
             $items = '';
             $currentLang = '<span class="ts-current-dt-lang btn" data-toggle="'.$this->type.'" href="#"><img src="'.$assetsUrl.'/images/flags/'.Yii::app()->language.'.gif"> '.Yii::app()->language.' (This language not active, please select other language)</span>';
             foreach ($languageArray as $lang) {
+                $item = strtr($this->itemTemplate, array(
+                        '{flag}'=>'<img src="'.$assetsUrl.'/images/flags/'.$lang->code2.'.gif">',
+                        '{name}'=>$lang->name,
+                        '{nativeName}'=>$lang->nativeName,
+                        '{code}'=>$lang->code2,
+                    ));
                 if($lang->code2 == Yii::app()->language) {
                     $currentLang = '<span class="ts-current-lang btn" data-toggle="'.$this->type.'" href="#">'.
                             strtr($this->itemTemplate, array(
@@ -161,16 +167,14 @@ class TsLanguageWidget extends CWidget
                                 '{nativeName}'=>$lang->nativeName,
                                 '{code}'=>$lang->code2,
                             )).'</span>';
+                    $items .= '<li><a data-language="'.$lang->code2.'" href="#" class="ts-current-lang-link" onclick="javascript:return false;">'.$item.'</a></li>';
                 } else {
-                    $item = strtr($this->itemTemplate, array(
-                        '{flag}'=>'<img src="'.$assetsUrl.'/images/flags/'.$lang->code2.'.gif">',
-                        '{name}'=>$lang->name,
-                        '{nativeName}'=>$lang->nativeName,
-                        '{code}'=>$lang->code2,
-                    ));
                     $params['_lang'] = $lang->code2;
                     $items .= '<li><a data-language="'.$lang->code2.'" href="'.Yii::app()->createUrl(Yii::app()->controller->route, $params).'">'.$item.'</a></li>';
                 }
+            }
+            if($this->type === 'inline') {
+                $currentLang = '';
             }
             if($urlManager->showLangInUrl) {
                 echo $templateArray[0].'<div id="'.$this->_id.'" class="'.$this->type.' ts-language-widget">'.$currentLang.'<ul class="'.$this->type.'-menu ts-lang-changer-list">'.$items.'</ul></div>'.$templateArray[1];
