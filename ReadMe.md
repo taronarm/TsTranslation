@@ -4,7 +4,12 @@ TsTranslation
    
 Extension for Yii framework (version `1.1.*`).  
 Easy to make Yii applications (web pages) multilanguage.
-You can discuss extension in [TsTranslation topic](http://www.yiiframework.com/forum/index.php/topic/57076-tstranslation/)
+You can discuss extension in [TsTranslation topic](http://www.yiiframework.com/forum/index.php/topic/57076-tstranslation/)  
+
+You can try **[Demo](http://tsaribekyan.tk/)** of extension just now.  
+ 
+Easy to install, easy to use, many functionality...
+----
 
 ## Installation
 * Download latest version of **[TsTranslation extension](https://github.com/TaronSaribekyan/TsTranslation/)** ,
