@@ -15,10 +15,18 @@ class SourceMessages extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-
+    
+    public function getDbConnection() {
+        $connectionID = Yii::app()->getComponent('messages')->connectionID;
+        if(Yii::app()->getComponent($connectionID) === null) {
+            throw new TsTranslationException('There is no connection component defined with name "'.$connectionID.'", which you passed in "messages" component as "connectionID".');
+        }
+        return Yii::app()->getComponent($connectionID);
+    }
+    
 	public function tableName()
 	{
-		return 'tsy_source_messages';
+		return Yii::app()->getComponent('messages')->sourceMessageTable; //'tsy_source_messages';
 	}
 
 	public function rules()

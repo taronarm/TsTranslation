@@ -219,7 +219,7 @@ class TsTranslation extends CApplicationComponent
     public static function dt($categoryOrModel, $messageOrAttribute, $language = null)
     {
         if(!self::model()->isAccessEnabled()) {
-            throw new CHttpException(403, 'You have no permission to use dynamic content save method!');
+            throw new CHttpException(403, 'You have no permission to use dynamic content translation method!');
         }
         $category = $categoryOrModel;
         $message = $messageOrAttribute;
@@ -236,7 +236,7 @@ class TsTranslation extends CApplicationComponent
                 }
                 $attribute = array();
                 foreach ($messageOrAttribute as $m) {
-                    if(property_exists($categoryOrModel, $m)) {
+                    if($categoryOrModel->hasAttribute($m) || property_exists($categoryOrModel, $m)) {
                         $attribute[$m] = Yii::t($categoryOrModel, $m, array(), null, $language);
                     } else {
                         throw new TsTranslationException('The model '.get_class($categoryOrModel).' have not attribute '.$m);
@@ -244,7 +244,7 @@ class TsTranslation extends CApplicationComponent
                 }
                 return $attribute;
             } else {
-                if(property_exists($categoryOrModel, $messageOrAttribute)) {
+                if($categoryOrModel->hasAttribute($messageOrAttribute) || property_exists($categoryOrModel, $messageOrAttribute)) {
                     return Yii::t($categoryOrModel, $messageOrAttribute, array(), null, $language);
                 } else {
                     throw new TsTranslationException('The model '.get_class($categoryOrModel).' have not attribute '.$messageOrAttribute);
@@ -299,7 +299,7 @@ class TsTranslation extends CApplicationComponent
             }
             if(is_array($messageOrAttribute)) {
                 foreach ($messageOrAttribute as $m) {
-                    if(property_exists($categoryOrModel, $m)) {
+                    if($categoryOrModel->hasAttribute($m) || property_exists($categoryOrModel, $m)) {
                         $category = '#.'.get_class($categoryOrModel).'-'.$m.'.'.$categoryOrModel->getPrimaryKey();
                         $message = $categoryOrModel->$m;
                         self::model()->_save($category, $message, $language);
@@ -308,7 +308,7 @@ class TsTranslation extends CApplicationComponent
                     }
                 }
             } else {
-                if(property_exists($categoryOrModel, $messageOrAttribute)) {
+                if($categoryOrModel->hasAttribute($messageOrAttribute) || property_exists($categoryOrModel, $messageOrAttribute)) {
                     $category = '#.'.get_class($categoryOrModel).'-'.$messageOrAttribute.'.'.$categoryOrModel->getPrimaryKey();
                     $message = $categoryOrModel->$messageOrAttribute;
                     self::model()->_save($category, $message, $language);
@@ -319,6 +319,88 @@ class TsTranslation extends CApplicationComponent
         } else {
             self::model()->_save($category, $message, $language);
         }
+    }
+    /**
+     * Delete Source and Translated messages
+     * 
+     * Example of use:
+     *  With Model instanceof CModel
+     *  <code>
+     *      if(isset($_POST['id'])) {
+     *          $model = Articles::model()->findByPk($_POST['id']);
+     *          if($model->delete()) {
+     *              // Delete $model all translated messages
+     *              TsTranslation::delete($model);
+     *              // OR only title
+     *              TsTranslation::delete($model, 'title');
+     *              // OR title and introText
+     *              TsTranslation::delete($model, array('title', 'introText'));
+     *          }
+     *      }
+     *  </code>
+     * 
+     *  With category and message in source code
+     *  <code>
+     *      // Delete all messages in "Default" category
+     *      TsTranslation::delete("Default");
+     *      // Delete concrete message in "Default" category
+     *      TsTranslation::delete("Default", 'Life is good');
+     *  </code>
+     * 
+     * @param CModel or string $categoryOrModel
+     * @param string or array $messageOrAttribute
+     * @throws CHttpException if user have not permission
+     */
+    public static function delete($categoryOrModel, $messageOrAttribute = null) {
+        if(!self::model()->isAccessEnabled()) {
+            throw new CHttpException(403, 'You have no permission to use dynamic content delete method!');
+        }
+        $category = $categoryOrModel;
+        $message = $messageOrAttribute;
+        $getIdsQuery = '';
+        $connectionID = Yii::app()->getComponent('messages')->connectionID;
+        if(is_object($categoryOrModel)) {
+            if($messageOrAttribute === null) {
+                $getIdsQuery = 'SELECT `id` FROM `'.SourceMessages::model()->tableName().'` WHERE `category` REGEXP "^#[.]{1}'.get_class($categoryOrModel).'-.*.\\.'.$categoryOrModel->getPrimaryKey().'$"';
+            } else {
+                if(is_array($messageOrAttribute) && !empty($messageOrAttribute)) {
+                    $tmpCondition = array();
+                    foreach ($messageOrAttribute as $attr) {
+                        $tmpCondition[] = '"#.'.get_class($categoryOrModel).'-'.$attr.'.'.$categoryOrModel->getPrimaryKey().'"';
+                    }
+                    $getIdsQuery = 'SELECT `id` FROM `'.SourceMessages::model()->tableName().'` WHERE `category` IN ('.implode(',', $tmpCondition).')';
+                } else {
+                    $getIdsQuery = 'SELECT `id` FROM `'.SourceMessages::model()->tableName().'` WHERE `category`="#.'.get_class($categoryOrModel).'-'.$messageOrAttribute.'.'.$categoryOrModel->getPrimaryKey().'"';
+                }
+            }
+        } else {
+            if($messageOrAttribute === null) {
+                $getIdsQuery = 'SELECT `id` FROM `'.SourceMessages::model()->tableName().'` WHERE `category`="'.$categoryOrModel.'"';
+            } else {
+                if(is_array($messageOrAttribute) && !empty($messageOrAttribute)) {
+                    $getIdsQuery = 'SELECT `id` FROM `'.SourceMessages::model()->tableName().'` WHERE `category`="'.$categoryOrModel.'" AND `message` IN ('.implode(',', $messageOrAttribute).')';
+                } else {
+                    $getIdsQuery = 'SELECT `id` FROM `'.SourceMessages::model()->tableName().'` WHERE `category`="'.$categoryOrModel.'" AND `message`="'.$messageOrAttribute.'"';
+                }
+            }
+        }
+        $deletingIds = !empty($getIdsQuery) ? Yii::app()->$connectionID->createCommand($getIdsQuery)->queryColumn() : null;
+        
+        if(!empty($deletingIds)) {
+            $sourceDeleteQuery = 'DELETE FROM `'.SourceMessages::model()->tableName().'` WHERE `id` IN ('.implode(',', $deletingIds).')';
+            $translatedDeleteQuery = 'DELETE FROM `'.TranslatedMessages::model()->tableName().'` WHERE `id` IN ('.implode(',', $deletingIds).')';
+            /**
+             * If Source Message deletion failed due to Translated Messages foreign key, at first deletes translated messages
+             */
+            try {
+                Yii::app()->$connectionID->createCommand($sourceDeleteQuery)->execute();
+                Yii::app()->$connectionID->createCommand($translatedDeleteQuery)->execute();
+            } catch(CDbException $e) {
+                Yii::app()->$connectionID->createCommand($translatedDeleteQuery)->execute();
+                Yii::app()->$connectionID->createCommand($sourceDeleteQuery)->execute();
+            }
+        }
+
     }
     
     /**
@@ -367,7 +449,7 @@ class TsTranslation extends CApplicationComponent
 			$source = new SourceMessages();
 			$source->category = $event->category;
 			$source->message = $event->message;
-			$source->save ();
+			$source->save();
 		}
 
         $translation = TranslatedMessages::model()->findByPk(array('id' => $source->id, 'language' => $event->language));

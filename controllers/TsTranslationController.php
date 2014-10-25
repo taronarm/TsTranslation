@@ -22,6 +22,7 @@ class TsTranslationController extends CExtController
     public function actionSaveOrdering() {
         $ok = 0;
         $message = 'Your request is invalid';
+        $connectionID = Yii::app()->getComponent('messages')->connectionID;
         if(Yii::app()->request->isAjaxRequest && isset($_POST['languageList'])) {
             $languageList = $_POST['languageList'];
             $tableName = ExtLanguages::model()->tableName();
@@ -30,7 +31,7 @@ class TsTranslationController extends CExtController
                 $tmpQuery .= ' WHEN "'.intval($id).'" THEN "'.(intval($ordering) + 1).'" ';
             }
             $query = 'UPDATE `'.$tableName.'` SET `ordering` = CASE `id` '.$tmpQuery.' ELSE `ordering` END';
-            if(Yii::app()->db->createCommand($query)->execute()) {
+            if(Yii::app()->$connectionID->createCommand($query)->execute()) {
                 $ok = 1;
                 $message = 'New ordering saved.';
             } else {
@@ -80,8 +81,9 @@ class TsTranslationController extends CExtController
                     $message = 'You can not remove default language.';
                 } elseif ($model->delete()) {
                     if($_POST['deleteTranslations'] == 'yes') {
+                        $connectionID = Yii::app()->getComponent('messages')->connectionID;
                         $query = 'DELETE FROM `'.TranslatedMessages::model()->tableName().'` WHERE `language`="'.$model->code2.'"';
-                        Yii::app()->db->createCommand($query)->execute();
+                        Yii::app()->$connectionID->createCommand($query)->execute();
                     }
                     $ok = 1;
                     $message = 'Language removed';

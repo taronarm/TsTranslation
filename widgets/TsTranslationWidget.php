@@ -137,8 +137,9 @@ class TsTranslationWidget extends CWidget
             $allLanguagesList = CHtml::listData($allLanguages, 'id', 'name');
 
             $sourceTableName = SourceMessages::model()->tableName();
+            $connectionID = Yii::app()->getComponent('messages')->connectionID;
             $sql = 'SELECT `category` FROM '.$sourceTableName.' GROUP BY `category`';
-            $categoryArray = Yii::app()->db->createCommand($sql)->queryColumn();
+            $categoryArray = Yii::app()->$connectionID->createCommand($sql)->queryColumn();
 
             $this->render('_translation_list', array(
                 'id' => $this->_id,

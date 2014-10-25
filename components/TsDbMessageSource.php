@@ -29,17 +29,19 @@ class TsDbMessageSource extends CMessageSource
     public $ifNotTranslatedShowDefault = true;
     
     private $_db;
-        
-	public function translate($category, $message, $language=null)
-	{
+    
+	public function translate($category, $message, $language = null) {
         $returnedValue = null;
-        
-        if(is_object($category) && property_exists($category, $message)) {
+        if(is_object($category)) {
             if($category->isNewRecord || $category->getPrimaryKey() === null) {
                 return null;
             }
-            $category = '#.'.get_class($category).'-'.$message.'.'.$category->getPrimaryKey();
-            $message = null;
+            if($category->hasAttribute($message) || property_exists($category, $message)) {
+                $category = '#.'.get_class($category).'-'.$message.'.'.$category->getPrimaryKey();
+                $message = null;                
+            } else {
+                throw new TsTranslationException('The model '.get_class($category).' have not attribute '.$message);
+            }
         } elseif($category === null) {
             $category = '';
             if(Yii::app()->controller->module !== null){
@@ -63,10 +65,9 @@ class TsDbMessageSource extends CMessageSource
         return !is_null($returnedValue) ? $returnedValue : $this->notTranslatedMessage;
 	}
     
-    public function getDbConnection()
-	{
-		if($this->_db === null)
-		{
+    public function getDbConnection() {
+        
+		if($this->_db === null) {
 			$this->_db = Yii::app()->getComponent($this->connectionID);
 			if(!$this->_db instanceof CDbConnection)
 				throw new CException(Yii::t('yii','CDbMessageSource.connectionID is invalid. Please make sure "{id}" refers to a valid database application component.',
@@ -75,8 +76,8 @@ class TsDbMessageSource extends CMessageSource
 		return $this->_db;
 	}
     
-    protected function loadMessages($category, $language)
-	{
+    protected function loadMessages($category, $language) {
+        
 		if($this->cachingDuration > 0 && $this->cacheID !== false && ($cache = Yii::app()->getComponent($this->cacheID)) !== null) {
 			$key = self::CACHE_KEY_PREFIX.'.messages.'.$category.'.'.$language;
 			if(($data=$cache->get($key)) !== false)
@@ -91,8 +92,8 @@ class TsDbMessageSource extends CMessageSource
 		return $messages;
 	}
     
-    protected function loadMessagesFromDb($category, $language)
-	{
+    protected function loadMessagesFromDb($category, $language) {
+        
 		$sql = <<<EOD
 SELECT t1.message AS message, t2.translation AS translation
 FROM {$this->sourceMessageTable} t1, {$this->translatedMessageTable} t2
