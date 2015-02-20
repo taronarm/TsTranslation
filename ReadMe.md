@@ -6,7 +6,7 @@ Extension for Yii framework (version `1.1.*`).
 Easy to make Yii applications (web pages) multilanguage.
 You can discuss extension in [TsTranslation topic](http://www.yiiframework.com/forum/index.php/topic/57076-tstranslation/)  
 
-You can try **[Demo](http://tsaribekyan.tk/)** of extension just now.  
+You can try **[Demo](http://tsaribekyan.tk.hostinghood.com/)** of extension just now.  
  
 Easy to install, easy to use, many functionality...
 ----
@@ -253,13 +253,13 @@ Easy to install, easy to use, many functionality...
         ));
 widget looks like this:  
 
-![](http://tsaribekyan.tk/images/tstranslation_demo/demo_1.PNG)
+![](http://tsaribekyan.tk.hostinghood.com/images/tstranslation_demo/demo_1.PNG)
 
 **2. Add new language**
 
 To add new language click `Add language` button, select language and confirm action.  
 
-![](http://tsaribekyan.tk/images/tstranslation_demo/demo_6.PNG)
+![](http://tsaribekyan.tk.hostinghood.com/images/tstranslation_demo/demo_6.PNG)
 
 **3. Change language status**
 
@@ -270,30 +270,30 @@ To activate / disable language press `Change status` button.
 
 Press `Make default` button and confirm action to set language as site default language.  
 
-![](http://tsaribekyan.tk/images/tstranslation_demo/demo_2.PNG)
+![](http://tsaribekyan.tk.hostinghood.com/images/tstranslation_demo/demo_2.PNG)
 
 **5. Translate messages**
 
 To translate messages press `Translate` button.  
 The categories tab will open automatically.  
 
-![](http://tsaribekyan.tk/images/tstranslation_demo/demo_5.PNG)  
+![](http://tsaribekyan.tk.hostinghood.com/images/tstranslation_demo/demo_5.PNG)  
 
 If you set in widget `'showDynamicContent' => true`, the dynamic contents are shown  
 
-![](http://tsaribekyan.tk/images/tstranslation_demo/demo_3.PNG)  
+![](http://tsaribekyan.tk.hostinghood.com/images/tstranslation_demo/demo_3.PNG)  
 
 Press category tab you want to translate and messages are shown   
 
-![](http://tsaribekyan.tk/images/tstranslation_demo/demo_4.PNG)  
+![](http://tsaribekyan.tk.hostinghood.com/images/tstranslation_demo/demo_4.PNG)  
 
 To translate any message **click to message**, and *popup window* are shown  
 
-![](http://tsaribekyan.tk/images/tstranslation_demo/demo_7.PNG)  
+![](http://tsaribekyan.tk.hostinghood.com/images/tstranslation_demo/demo_7.PNG)  
 
 There are 3 buttons in popup window:  
 
-![](http://tsaribekyan.tk/images/tstranslation_demo/demo_8.PNG)  
+![](http://tsaribekyan.tk.hostinghood.com/images/tstranslation_demo/demo_8.PNG)  
 
 > `Save` button (`Ctrl + S` or `Ctrl + Enter`) - save message if it changed and open next message text in popup, if message not changed popup closes  
 > `Translate` button (`Ctrl + G`) - **translate message via Google**  
@@ -301,11 +301,11 @@ There are 3 buttons in popup window:
   
 There are 2 buttons in every tab:  
   
-![](http://tsaribekyan.tk/images/tstranslation_demo/demo_9.PNG) 
+![](http://tsaribekyan.tk.hostinghood.com/images/tstranslation_demo/demo_9.PNG) 
   
 > `Translate all` - translate all saved messages with google  
   
-![](http://tsaribekyan.tk/images/tstranslation_demo/demo_10.PNG) 
+![](http://tsaribekyan.tk.hostinghood.com/images/tstranslation_demo/demo_10.PNG) 
   
 > `Save all` - save all unsaved messages (unsaved messages shown with **bold** font)  
   
