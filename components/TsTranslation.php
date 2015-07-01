@@ -312,17 +312,17 @@ class TsTranslation extends CApplicationComponent {
                 }
             }
         } else {
-            if(!is_string($category)) {
+            if (!is_string($category)) {
                 throw new TsTranslationException('The first parameter of TsTranslation::save() method must be CActiveRecord model or string');
             }
-            if(!is_string($message)) {
+            if (!is_string($message)) {
                 throw new TsTranslationException('If the first parameter of TsTranslation::save() method is string, the second parameter also must be string');
             }
             $event = new CMissingTranslationEvent(self::getTsTranslation(), $category, $message, $language);
             self::addTranslation($event);
         }
     }
-    
+
     /**
      * Private function for saving dynamic content
      * 
