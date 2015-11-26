@@ -8,7 +8,11 @@
  */
 class TsTranslationWidget extends CWidget {
 
-    private $scriptPosition = CClientScript::POS_HEAD;
+    /**
+     * scripts load position
+     * @var int
+     */
+    public $scriptPosition = CClientScript::POS_BEGIN;
 
     /**
      * force copy assets on every load, set to true in develop mode

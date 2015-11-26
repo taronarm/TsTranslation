@@ -8,7 +8,11 @@
  */
 class TsLanguageWidget extends CWidget {
 
-    private $scriptPosition = CClientScript::POS_HEAD;
+    /**
+     * scripts load position
+     * @var int
+     */
+    public $scriptPosition = CClientScript::POS_BEGIN;
     public $id;
 
     /**
