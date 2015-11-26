@@ -10,7 +10,7 @@ class TsTranslationWidget extends CWidget {
 
     /**
      * scripts load position
-     * @var int
+     * @var int 
      */
     public $scriptPosition = CClientScript::POS_BEGIN;
 
