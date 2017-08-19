@@ -6,7 +6,7 @@ Extension for Yii framework (version `1.1.*`).
 Easy to make Yii applications (web pages) multilanguage.
 You can discuss extension in [TsTranslation topic](http://www.yiiframework.com/forum/index.php/topic/57076-tstranslation/)  
 
-You can try **[Demo](http://tstranslation.sundevelop.com/)** of extension just now.  
+You can try **[Demo](http://www.site11.com/tstranslation/)** of extension just now.  
  
 Easy to install, easy to use, many functionality...
 ----
